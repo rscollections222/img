@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+}
+.slider{
+  position:relative;
+  overflow:hidden;
+}
+.track{
+  display:flex;
+  transition:transform .4s ease;
+}
+.slide{
+  min-width:100%;
+}
+.slide img{
+  width:100%;
+  display:block;
+}
+.dots{
+  position:absolute;
+  bottom:10px;
+  width:100%;
+  text-align:center;
+}
+.dots span{
+  display:inline-block;
+  width:8px;
+  height:8px;
+  background:#ddd;
+  border-radius:50%;
+  margin:0 4px;
+}
+.dots .active{
+  background:#25D366;
+}
+</style>
+</head>
+
+<body>
+
+<div class="slider">
+  <div class="track" id="track">
+    <div class="slide">
+      <img src="https://raw.githubusercontent.com/rscollections222/img/main/necklaceset.png">
+    </div>
+    <div class="slide">
+      <img src="IMAGE_URL_2">
+    </div>
+    <div class="slide">
+      <img src="IMAGE_URL_3">
+    </div>
+  </div>
+
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+let i=0;
+const track=document.getElementById("track");
+const slides=document.querySelectorAll(".slide");
+const dots=document.getElementById("dots");
+
+slides.forEach((_,idx)=>{
+  const d=document.createElement("span");
+  if(idx===0) d.classList.add("active");
+  dots.appendChild(d);
+});
+
+setInterval(()=>{
+  i=(i+1)%slides.length;
+  track.style.transform=`translateX(-${i*100}%)`;
+  dots.querySelectorAll("span").forEach(d=>d.classList.remove("active"));
+  dots.children[i].classList.add("active");
+},3000);
+</script>
+
+</body>
+</html>
